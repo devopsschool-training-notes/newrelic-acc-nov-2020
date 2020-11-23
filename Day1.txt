@@ -1,0 +1,121 @@
+Rajesh Kumar
+============================
+Infra mon* using NewRelic.
+============================
+Days - 4
+============================
+Start time - 9 AM IST
+End time - 6 PM IST
+===========================
+Lunch hour - 1 PM - 2 PM IST
+-------
+2 BREAK - 20 mins
+	TEA
+	Coffee
+	Rest
+	Personal 
+===========================
+Demo & Lab - AWS 
+===========================
+World of INFRA - APPS - Services 
+======================================
+World of DevOps.
+======================================
+Dev Team
+-------------------------
+
+
+
+
+Prod Team
+-------------------------
+	Dev + Ops
+	=========
+	 DevOps
+=======================================================================================
+Software Dev Model	WATERFALL	AGILE	 	DevOps		DevSecOps		
+
+Software Dev Arch	Monolitic	SOA		Microservices
+
+Software Run time Env	PHYSICAL	VIRTUAL		Containers
+=======================================================================================
+
+How to do Monitoring?
+------------------------
+What to monitor?
+=========================
+What the components of the software runtime in today's world.
+-------------------------------------------------------
+Virtual Machine - Container
+---------------------------
+APP SERVER
+WEB SERVER
+DB SERVER
+CLOUD - AWS - AZURE - GC
+LOGS
+==============================================
+https://www.devopsschool.com/path/
+
+==============================================
+First Demo 1 -
+============================================== 
+Step 1: Login to AWS Console		DONE
+
+Step 2: Create a LINUX Centos 7 VM	DONE
+
+Step 3: Login Centos VM			DONE
+https://www.devopsschool.com/blog/how-to-login-linux-server-of-aws-from-windows-using-putty/
+
+Step 4: [NEWRELIC] Add your data => Host operating systems => CentOS	DONE
+
+Step 5: [NEWRELIC] Get your license key		DONE
+
+Step 6: [NEWRELIC] Select your CentOS version	DONE
+		
+Step 7: [NEWRELIC] Run a command on CENTOS	DONE
+
+# Create a configuration file and add your license key \
+
+echo "license_key: 099b6b90554f8a74cf80c0bed8baca4d39f3NRAL" | sudo tee -a /etc/newrelic-infra.yml && \
+
+\
+
+# Create the agent’s yum repository \
+
+sudo curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo && \
+
+\
+
+# Update your yum cache \
+
+sudo yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra' && \
+
+\
+
+# Run the installation script \
+
+sudo yum install newrelic-infra -y
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
