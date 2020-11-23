@@ -158,8 +158,28 @@ docker run -itd centos
 
 
 BACK TO NEW RELIC DASHBOARD
+==============================================
+How to enable host process in Newrelic infra agent?
 
 
+enable_process_metrics=true
+	in newrelic.yaml file.
+
+
+[root@ip-10-0-1-155 etc]# more /etc/newrelic-infra.yml
+license_key: 099b6b90554f8a74cf80c0bed8baca4d39f3NRAL
+enable_process_metrics: true
+
+
+
+Restart a agent.
+
+How to stop - start - restart agent?
+https://www.devopsschool.com/blog/newrelic-infrastructure-start-stop-and-restart-the-infrastructure-agent/
+
+13.234.118.57
+Administrator
+(LwjmhQ(boLA=CmP&$!vUR2XKII!qeOx
 
 
 
