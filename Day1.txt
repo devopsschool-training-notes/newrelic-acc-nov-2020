@@ -115,16 +115,49 @@ How to install Docker?
 -----------------------------
 https://www.devopsschool.com/tutorial/docker/install-config/docker-install-commuityedition-centos-rhel.html
 15 mins
+================================================
+How to run containers? AKA container lifecycle
+=======================================
+create -> start -> stop -> restart -> pause -> unpause -> kill -> remove
+ 1  clear
+    2  ls
+    3  docker ps
+    4  docker create jenkins
+    5  clear
+    6  docker images
+    7  docker ps
+    8  docker ps -a
+    9  docker start 09f25dfa6a5f
+   10  docker ps
+   11  docker stop 09f25dfa6a5f
+   12  docker ps
+   13  docker ps -a
+   14  docker restart 09f25dfa6a5f
+   15  docker ps -a
+   16  docker pause 09f25dfa6a5f
+   17  docker ps -a
+   18  docker unpause 09f25dfa6a5f
+   19  docker ps -a
+   20  docker kill 09f25dfa6a5f
+   21  docker ps -a
+   22  docker rm 09f25dfa6a5f
+   23  docker ps -a
+   24  history
 
 
+docker run -d jenkins
+docker run -d sonarqube
+docker run -d httpd
+docker run -itd ubuntu
+docker run -itd centos
+
+10  docker rename dc63c5943c24 ubuntu1
+11  docker rename 8b295deee26c httpd1
+12  docker rename 13c58d673ec7 sonarqube1
+13  docker rename b10b69ffa5c6 jenkins1
 
 
-
-
-
-
-
-
+BACK TO NEW RELIC DASHBOARD
 
 
 
