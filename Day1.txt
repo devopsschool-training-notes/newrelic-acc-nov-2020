@@ -180,6 +180,20 @@ https://www.devopsschool.com/blog/newrelic-infrastructure-start-stop-and-restart
 13.234.118.57
 Administrator
 (LwjmhQ(boLA=CmP&$!vUR2XKII!qeOx
+==================================================
+Step 1  - How to install Apache 2 in Centos 7
+---------------------------------------
+$ sudo yum install httpd	
+$ systemctl start httpd
+
+Step 2  - Edit "apache-config.yml".
+
+https://github.com/newrelic/nri-apache/blob/master/apache-config.yml.sample
+
+
+
+
+
 
 
 
