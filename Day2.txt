@@ -23,7 +23,131 @@ config file
 ===========================================
 15 mins to Correct APACHE Setup
 https://www.devopsschool.com/blog/newrelic-infrastructure-apache2-integration-and-monitoring-in-linux-centos-with-newrelic/
+===================================================
+What is Ansible?
+	- Deployment Tools. (Parrell Work)
+	- you can change any configs of the SERVER(S) from one PLACE
+			Using Playbook.
+	
+	Use Cases:
+		Install|unin|start|stop NewRelic agent into multiple server
+		Configure newrelic config file into multiple server
+
+	By REDHAT
+	Written in Python
+	==============================
+
+Ansible Architecture
+============================================
+Human -> 	Ansible Control Server(ACS) => Ansible Remote Server(S) - ARS
+		-> Linux			- LINUX & WINDOS
+
+		ACS 			------ SSH ---  ARS(LINUX)
+		ACS 			------ WINRAM HTTP ---  ARS(WINDOWS)
 
 
+	      
+		- What you want to do in ARS? - Express in YAML file - Called as  PLAYBOOK
+		- Which ARS you want to do? - Express in INI file - Called as Inventory - Containers IP Address
+		- How ACS would connect to ARS - USER and KEY with sudo access.s
+			
+=======================================================
+ACS - 1	13.233.94.160
+ARS - 2	65.0.100.226	13.127.207.115
+=======================================================
+Step 1 - How to install Ansible in ACS?
+https://www.devopsschool.com/blog/how-to-install-ansible-in-centos-7-rhel-7/
+
+Step 2 - Write a Playbook which would do 2 things...
+	Use Cases:
+		Install|unin|start|stop NewRelic agent into multiple server
+		Configure newrelic config file into multiple server
+
+	Playbook
+		file in yaml
+		Has Multiple PLAY(LIST)
+
+	Each PLAY has 
+		- TASK(S): What should be run
+		- Host(S): This represent - Where should be run??? AKA Inventory GROUP
+
+	Each Task 
+		is a Module and its Parameter
+
+	Module 
+		Is a Task to be performed in ARS
+
+
+---
+- name: webserver setup     
+  hosts: all
+ 
+  tasks:
+    - name: Install the latest version of Apache
+      yum:
+        name: httpd
+        state: installed
+    - name: Start service httpd, if not started
+      service:
+        name: httpd
+        state: started
+    - name: Copy file with owner and permissions
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+
+
+---
+- name: newrelic agent setup  
+  hosts: all
+ 
+  tasks:
+    - script: agent-install.sh 
+
+==========agent-install.sh==========================================
+
+# Create a configuration file and add your license key \
+
+echo "license_key: 099b6b90554f8a74cf80c0bed8baca4d39f3NRAL" | sudo tee -a /etc/newrelic-infra.yml && \
+
+\
+
+# Create the agent’s yum repository \
+
+sudo curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo && \
+
+\
+
+# Update your yum cache \
+
+sudo yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra' && \
+
+\
+
+# Run the installation script \
+
+sudo yum install newrelic-infra -y
+===============================================================================
+Step 3 - create a inventory
+
+Step 4 - run this command
+
+$ ansible-playbook -i inventory newrelic.yaml -u centos --key-file=node.pem -b
+
+
+
+ 19  vi agent-install.sh
+   20  chmod 755 agent-install.sh
+   21  vi inventory
+   22  ls
+   23  vi node.pem
+   24  chmod 600 node.pem
+   25  ls
+   26  clear
+   27  ansible-playbook -i inventory newrelic.yaml -u centos --key-file=node.pem -b
+   28  ansible-playbook -i inventory newrelic.yaml -u centos --key-file=node.pem -b
+   29  clear
+   30  ansible-playbook -i inventory newrelic.yaml -u centos --key-file=node.pem -b
+   31  history
 
 
