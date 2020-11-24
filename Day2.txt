@@ -1,0 +1,29 @@
+QS - How can i deploy agent and config file to multiple machine.
+		- WINDOWS
+		- Linux
+----
+	Using 
+		Ansible
+		Chef
+		Puppet
+===============================================================
+- ANSIBLE - https://www.devopsschool.com/videos/show/ansible?type=video
+Chef - https://www.devopsschool.com/videos/show/chef?type=video
+Puppet - https://www.devopsschool.com/videos/show/Puppet?type=video
+====================================================
+
+config file
+	- license_key
+	- display_name
+	- custom_attributes
+	- log_file
+	- log_format
+	- log_to_stdout	
+	- verbose
+===========================================
+15 mins to Correct APACHE Setup
+https://www.devopsschool.com/blog/newrelic-infrastructure-apache2-integration-and-monitoring-in-linux-centos-with-newrelic/
+
+
+
+
