@@ -149,5 +149,107 @@ $ ansible-playbook -i inventory newrelic.yaml -u centos --key-file=node.pem -b
    29  clear
    30  ansible-playbook -i inventory newrelic.yaml -u centos --key-file=node.pem -b
    31  history
+=============================================================
+What i want?
+
+
+
+newrelic-infra.yml
+===========================
+
+
+license_key: 099b6b90554f8a74cf80c0bed8baca4d39f3NRAL
+custom_attributes:
+   environment: production
+   service: login service
+   team: devops-team
+enable_process_metrics: true
+verbose: 1
+
+
+---
+- name: newrelic agent setup  
+  hosts: all
+ 
+  tasks:
+    - script: agent-install.sh
+    - script: docker-install.sh
+    - script: install-docker-compose.sh
+    - copy:
+        src: newrelic-infra.yml
+        dest: /etc/newrelic-infra.yml
+    - copy:
+        src: docker-compose.yaml
+        dest: /root/docker-compose.yaml
+    - name: Setup a apps
+      command: docker-compose up -d
+      args:
+        chdir: /root/
+    - name: restart a nwrelic agent
+      command: sudo systemctl restart newrelic-infra
+------------docker-install.sh------------------
+sudo yum install yum-utils device-mapper-persistent-data lvm2 -y
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
+sudo yum install docker-ce -y 
+sudo systemctl enable docker
+sudo systemctl start docker
+
+-----install-docker-compose.sh-----------------
+rm -rf /usr/local/bin/docker-compose
+rm -rf /usr/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+------------run apps using docker-compose------------------
+
+version: '2'
+services:
+  wordpress:
+    image: wordpress:latest # https://hub.docker.com/_/wordpress/
+    ports:
+      - 80:80 # change ip if required
+    volumes:
+      - ./wp-app:/var/www/html # Full wordpress project
+      #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
+      #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: password
+    depends_on:
+      - db
+    networks:
+      - wordpress-network
+  db:
+    image: mysql:latest # https://hub.docker.com/_/mysql/ - or mariadb https://hub.docker.com/_/mariadb
+    ports:
+      - 3306:3306 # change ip if required
+    volumes:
+      - ./wp-data:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - wordpress-network
+networks:
+  wordpress-network:
+      driver: bridge
+
+ansible-playbook -i inventory newrelic-ansible-deploy-wordpress-compose.yaml -u centos --key-file=node.pem -b
+
+
+docker run -d --rm progrium/stress -c 8 -t 100s
+
+
+
+
+
+
+
+
 
 
