@@ -21,3 +21,54 @@ Step 3 - Start Manual Testing "http://rajeshkumar.xyz/" and Record session.
 
 Step 4 -  Export Mantual testing Steps to Script. into .js
 
+=================================
+13.126.212.106
+--------------
+
+
+
+
+docker run -itd -e MINION_PRIVATE_LOCATION_KEY=NRSP-usdds -v /tmp:/tmp:rw -v /var/run/docker.sock:/var/run/docker.sock:rw quay.io/newrelic/synthetics-minion:latest
+
+
+
+MINE
+--------------------
+docker run -d -e MINION_PRIVATE_LOCATION_KEY=NRSP-us014049B2DE552C9A1F210973FB899C13C -v /tmp:/tmp:rw -v /var/run/docker.sock:/var/run/docker.sock:rw quay.io/newrelic/synthetics-minion:latest
+
+=====================
+13.232.138.177
+
+
+92  yum install wget -y
+   93  clear
+   94  wget https://get.helm.sh/helm-v3.4.1-linux-amd64.tar.gz
+   95  ls
+   96  tar -zxvf helm-v3.4.1-linux-amd64.tar.gz
+   97  clear
+   98  ls
+   99  cd linux-amd64
+  100  ls
+  101  echo $PATH
+  102  chmod 755 helm
+  103  mv helm /usr/bin
+
+
+
+$ helm repo add YOUR_REPO_NAME https://helm-charts.newrelic.com/charts
+
+Then, install the CPM with the following Helm command:
+
+$ kubectl create ns raju
+
+$  helm install minion YOUR_REPO_NAME/synthetics-minion -n raju --set synthetics.privateLocationKey=NRSP-us01707AC2FF76C43DAF100598B0F71FA03
+
+To confirm if the minion pod is up and running:
+
+$ kubectl get -n YOUR_NAMESPACE pods
+
+
+
+
+
+
