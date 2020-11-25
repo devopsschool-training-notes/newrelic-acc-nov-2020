@@ -66,6 +66,49 @@ $  helm install minion YOUR_REPO_NAME/synthetics-minion -n raju --set synthetics
 To confirm if the minion pod is up and running:
 
 $ kubectl get -n YOUR_NAMESPACE pods
+================================================================
+
+WINDOWS  - 
+13.233.214.71
+
+Linux
+13.234.38.28
+
+  - name: docker-logs
+    file: /var/lib/docker/containers/*/*.log # Path to multiple folders and files
+
+
+  - name: apache-error-log
+    file: /var/log/httpd/error_log
+
+  - name: apache-accesss-log
+    file: /var/log/httpd/access_log
+
+https://github.com/newrelic/infrastructure-agent/tree/master/assets/examples/logging
+
+
+
+
+
+Public IP
+ 13.233.214.71
+User name
+ Administrator
+Password
+ (LwjmhQ(boLA=CmP&$!vUR2XKII!qeOx
+
+
+
+
+  # TCP log ingestion in JSON format.
+  - name: tcp-json
+    tcp:
+      uri: tcp://13.234.38.28
+
+
+
+curl http://13.234.38.28
+
 
 
 
