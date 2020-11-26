@@ -1,0 +1,29 @@
+65.0.89.131
+
+http://65.0.89.131:8080/
+http://65.0.89.131:8080/examples/servlets/servlet/HelloWorldExample
+
+In your catalina.sh file, use the JAVA_OPTS environment variable:
+export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/opt/newrelic/newrelic.jar"
+export JAVA_OPTS="$JAVA_OPTS -javaagent:/var/lib/tomcat8/webapps/newrelic/newrelic.jar"
+
+
+Step 1 - Newrelic.jar and newrewlic.yaml file in HOST where app is running
+Ste 2 - Newrelic.jar into APP RUN ENV
+=======================================================================
+	VMS				Container
+------------------		-------------------------
+	Ansible				 Docker Image
+
+http://65.0.89.131:8080/examples/servlets/servlet/RequestInfoExample
+
+Step1 - Download and Install JDK and Set JAVA_HOME
+
+Step 2 - Download and extract Jmeter from Apache Website
+
+Step 3 - C:\tools\apache-jmeter-5.3\bin and Start jmeter.bat
+
+Step 4 - https://www.guru99.com/jmeter-performance-testing.html
+
+
+
